@@ -1,85 +1,59 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView } from "vue-router";
+import Sidebar from "./components/Sidebar.vue";
+import HeaderBar from "./components/HeaderBar.vue";
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="app-container">
+    <header class="header">
+      <HeaderBar />
+    </header>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div class="main-content">
+      <!-- <aside class="sidebar">
+        <Sidebar />
+      </aside> -->
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <main class="content">
+        <RouterView />
+      </main>
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.app-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.main-content {
+  display: flex;
+  flex: 1;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.sidebar {
+  width: 150px;
+  min-width: 150px;
+  background-color: var(--mt-theme-primary-sidebar);
+  overflow-y: auto;
+  transition: 0.3s ease-in-out all;
+  display: flex;
+  flex-direction: column;
+  z-index: 90;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  bottom: 0;
+}
+.sidebar:hover {
+  width: 150px;
+  min-width: 150px;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.content {
+  flex: 1;
+  overflow-y: auto;
 }
 </style>
