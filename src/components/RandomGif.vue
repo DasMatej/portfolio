@@ -1,9 +1,14 @@
 <template>
   <div>
-    <a v-if="!gifUrl" class="nav-link" href="#" title="Surprise!!">
+    <div
+      v-if="loading"
+      class="spinner-grow text-success"
+      role="status"
+      style="width: 40px; height: 38px;"
+    ></div>
+    <a v-else class="nav-link" href="#" title="Surprise!!" @click="fetchGif">
       <div>
-        <!-- If no gif is loaded yet, show the icon -->
-        <div class="icon" @click="fetchGif">
+        <div class="icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -21,42 +26,32 @@
         </div>
       </div>
     </a>
-    <!-- If gif is loaded, show it -->
-    <div v-else class="gif-wrapper">
+
+    <div v-if="gifUrl" class="gif-wrapper">
       <img :src="gifUrl" alt="Random Gif" class="gif-thumbnail" />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default defineComponent({
-  name: "RandomGif",
-  setup() {
-    const gifUrl = ref<string | null>(null);
+const gifUrl = ref<string | null>(null);
+const loading = ref(false);
 
-    const fetchGif = async () => {
-      try {
-        debugger;
-        const res = await fetch(
-          `https://api.giphy.com/v1/gifs/random?api_key=Z1Wu6ZrvzVI9IUDNXcXvX6ht7V1KQYIY&tag=dog+fails&rating=g`
-        );
-        const data = await res.json();
-
-        // ✅ Correct way to set the gif URL
-        gifUrl.value = data.data.images.fixed_height.url;
-      } catch (err) {
-        console.error("Error fetching GIF:", err);
-      }
-    };
-
-    return {
-      gifUrl,
-      fetchGif,
-    };
-  },
-});
+const fetchGif = async () => {
+  if (loading.value) return;
+  loading.value = true;
+  try {
+    const res = await fetch("/api/gif");
+    const data = await res.json();
+    gifUrl.value = data.data.images.fixed_height.url;
+  } catch (err) {
+    console.error("Error fetching GIF:", err);
+  } finally {
+    loading.value = false;
+  }
+};
 </script>
 
 <style scoped>

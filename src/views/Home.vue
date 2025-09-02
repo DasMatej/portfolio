@@ -12,48 +12,42 @@
       <div class="marquee-container mt-auto container mb-lg-2 mb-5">
         <div class="marque-gradiant"></div>
         <div class="marquee-content">
-          <span class="marqueeText">JavaScript</span>
-          <span class="marqueeText">Html / CSS / SCSS</span>
-          <span class="marqueeText">React JS</span>
-          <span class="marqueeText">Vue Js</span>
-          <span class="marqueeText">Node Js</span>
-          <span class="marqueeText">Express</span>
-          <span class="marqueeText">Java</span>
-          <span class="marqueeText">SpringBoot</span>
-          <span class="marqueeText">MongoDB</span>
-          <span class="marqueeText">MySQL</span>
-          <span class="marqueeText">Git</span>
-          <span class="marqueeText">PWA</span>
-          <span class="marqueeText">Webworker</span>
-          <span class="marqueeText">Sockey.io</span>
-          <span class="marqueeText">WeBRTC</span>
-          <span class="marqueeText">AWS</span>
-          <span class="marqueeText">Docker</span>
-          <span class="marqueeText">Bash Script</span>
-          <span class="marqueeText" aria-hidden="true">JavaScript</span>
-          <span class="marqueeText" aria-hidden="true">Html / CSS / SCSS</span>
-          <span class="marqueeText" aria-hidden="true">React JS</span>
-          <span class="marqueeText" aria-hidden="true">Vue Js</span>
-          <span class="marqueeText" aria-hidden="true">Node Js</span>
-          <span class="marqueeText" aria-hidden="true">Express</span>
-          <span class="marqueeText" aria-hidden="true">Java</span>
-          <span class="marqueeText" aria-hidden="true">SpringBoot</span>
-          <span class="marqueeText" aria-hidden="true">MongoDB</span>
-          <span class="marqueeText" aria-hidden="true">MySQL</span>
-          <span class="marqueeText" aria-hidden="true">Git</span>
-          <span class="marqueeText" aria-hidden="true">PWA</span>
-          <span class="marqueeText" aria-hidden="true">Webworker</span>
-          <span class="marqueeText" aria-hidden="true">Sockey.io</span>
-          <span class="marqueeText" aria-hidden="true">WeBRTC</span>
-          <span class="marqueeText" aria-hidden="true">AWS</span>
-          <span class="marqueeText" aria-hidden="true">Docker</span>
-          <span class="marqueeText" aria-hidden="true">Bash Script</span>
+          <span
+            v-for="(skill, index) in [...skills, ...skills]"
+            :key="index"
+            class="marqueeText"
+            :aria-hidden="index >= skills.length"
+          >
+            {{ skill }}</span
+          >
         </div>
       </div>
     </div>
   </section>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const skills = [
+  "JavaScript",
+  "TypeScript",
+  "ASP.NET",
+  "C#",
+  "Vue.js",
+  "React.js",
+  "SQL",
+  "Microsoft SQL Server",
+  "Entity Framework",
+  "NHibernate",
+  "jQuery",
+  "Bootstrap",
+  "HTML",
+  "CSS",
+  "SCSS",
+  "Git",
+  "Java",
+  "MySQL",
+  "Firebase",
+];
+</script>
 <style>
 .heroSection {
   background: rgb(255, 255, 255);
