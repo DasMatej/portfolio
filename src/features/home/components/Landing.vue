@@ -2,7 +2,7 @@
   <section class="heroSection d-flex flex-column full-vh">
     <canvas id="dustCanvas" style="z-index: 0;"></canvas>
     <div class="full-vh d-flex flex-column">
-      <h1 class="text-center herotitle">MATEJ DASKALOSKI</h1>
+      <h1 class="text-center herotitle">MATEJ <br />DASKALOSKI</h1>
       <h2 class="mt-5 text-center subtitleFont p-2 neutralFonts">
         SOFTWARE DEVELOPER
       </h2>
@@ -33,6 +33,7 @@ const skills = [
   "C#",
   "Vue.js",
   "React.js",
+  "Python",
   "SQL",
   "Microsoft SQL Server",
   "Entity Framework",
@@ -48,7 +49,7 @@ const skills = [
   "Firebase",
 ];
 </script>
-<style>
+<style scoped>
 .heroSection {
   background: rgb(255, 255, 255);
   background: radial-gradient(
@@ -74,17 +75,16 @@ canvas {
 }
 
 .herotitle {
-  font-size: 150px;
+  font-size: 100px;
   text-align: center;
-  background: rgb(0, 0, 0);
   background: radial-gradient(
-    circle at top center,
-    rgba(255, 255, 255, 0.1),
-    rgba(68, 61, 61, 0.8) 104%
-  );
-  -webkit-background-clip: text;
+      circle at center top,
+      rgb(255, 255, 255),
+      rgb(64, 51, 51) 49%
+    )
+    text;
   -webkit-text-fill-color: transparent;
-  padding-top: 10%;
+  padding-top: 5%;
   font-family: "Neutral Face", sans-serif;
 }
 
