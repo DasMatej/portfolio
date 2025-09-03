@@ -1,8 +1,10 @@
 <template>
   <section class="heroSection d-flex flex-column full-vh">
-    <canvas id="dustCanvas" style="z-index: 0;"></canvas>
+    <LandingBackground />
     <div class="full-vh d-flex flex-column">
-      <h1 class="text-center herotitle">MATEJ <br />DASKALOSKI</h1>
+      <h1 class="text-center herotitle" style="z-index: 0;">
+        MATEJ <br />DASKALOSKI
+      </h1>
       <h2 class="mt-5 text-center subtitleFont p-2 neutralFonts">
         SOFTWARE DEVELOPER
       </h2>
@@ -26,6 +28,8 @@
   </section>
 </template>
 <script setup lang="ts">
+import LandingBackground from "./LandingBackground.vue";
+
 const skills = [
   "JavaScript",
   "TypeScript",
@@ -63,15 +67,6 @@ const skills = [
 
 canvas {
   display: block;
-}
-
-#dustCanvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
 }
 
 .herotitle {
