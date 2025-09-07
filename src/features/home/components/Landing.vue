@@ -1,5 +1,5 @@
 <template>
-  <section class="heroSection d-flex flex-column full-vh">
+  <section class="heroSection d-flex flex-column full-vh mb-5">
     <LandingBackground />
     <div class="full-vh d-flex flex-column">
       <h1 class="text-center herotitle" style="z-index: 0;">
