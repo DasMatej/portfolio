@@ -1,6 +1,11 @@
 <template>
   <div v-for="value in info">
-    <Icon :icon="value.icon" width="24" height="24" />
+    <Icon
+      :icon="value.icon"
+      width="24"
+      height="24"
+      class="mt-ft-color-red me-2"
+    />
     <span>{{ value.text }}</span>
   </div>
 </template>

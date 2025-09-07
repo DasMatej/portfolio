@@ -34,18 +34,16 @@ const section = ref<HTMLElement | null>(null);
 const cards = ref<HTMLDivElement[]>([]);
 
 onMounted(() => {
-  // Pin the whole section (timeline stays in place)
   ScrollTrigger.create({
     trigger: section.value,
     start: "top top",
     end: "bottom bottom",
-    pin: ".timeline", // keeps the line fixed
+    pin: ".timeline",
   });
 
-  // Animate each card in
   cards.value.forEach((card, i) => {
     gsap.from(card, {
-      x: i % 2 === 0 ? -200 : 200, // from left or right
+      x: i % 2 === 0 ? -200 : 200,
       opacity: 0,
       duration: 1,
       scrollTrigger: {
