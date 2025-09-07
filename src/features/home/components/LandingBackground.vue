@@ -35,11 +35,11 @@ onMounted(() => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
 
-  // 🌌 Create a group for stars + logos
+  // Create a group for stars + logos
   starGroup = new THREE.Group();
   scene.add(starGroup);
 
-  // ⭐ Dust particles
+  // Dust particles
   const geometry = new THREE.BufferGeometry();
   const particleCount = 2000;
   const positions = new Float32Array(particleCount * 3);
@@ -55,7 +55,7 @@ onMounted(() => {
   const particles = new THREE.Points(geometry, material);
   starGroup.add(particles);
 
-  // 🌟 Logos inside the same group
+  // Logos inside the same group
   const textureLoader = new THREE.TextureLoader();
   const brandLogos: BrandLogo[] = [
     ...repeatLogo("/logos/JavaScript-logo.png", 0.4, 5),
@@ -78,7 +78,7 @@ onMounted(() => {
     starGroup.add(sprite);
   });
 
-  // 🎬 Animate (rotate the whole group)
+  // Animate (rotate the whole group)
   const animate = () => {
     animationId = requestAnimationFrame(animate);
 
