@@ -1,16 +1,15 @@
-export type WorkingExperience = {
+export interface WorkingExperience {
   year: string;
-  calculateYear: number;
+  workingTime?: string;
   title: string;
-  subTitle: string;
-  location: string;
+  subTitle?: string;
+  location?: string;
   details: string;
-  points: Points[];
-  tech: [string];
-};
+  points?: Points[];
+  techs?: string[];
+  isPresent?: boolean;
+}
 export type Points = {
   img: string;
   details: string;
 };
-
-const calcualteYear = () => {};
