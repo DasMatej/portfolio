@@ -1,5 +1,8 @@
 <template>
-  <section class="container about-section mb-5">
+  <section
+    class="mt-section container about-section"
+    style="margin-bottom: 10rem !important;"
+  >
     <div class="h3">About Me</div>
     <div class="mt-3">
       <div class="row mb-5">

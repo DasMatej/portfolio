@@ -1,6 +1,7 @@
 :root {
   --mt-text-primary: rgba(235, 235, 235, 0.64);
   --mt-theme-primary: rgb(19, 19, 19);
+  --mt-theme-primary-card: rgb(27, 27, 27);
   --mt-theme-primary-sidebar: rgb(31, 31, 31);
   --mt-theme-primary-header: rgb(44, 44, 44);
   --mt-color-green: hsla(160, 100%, 37%, 1);
@@ -9,6 +10,7 @@
 
 :root {
   --color-background: var(--mt-theme-primary);
+  --color-background-card: var(--mt-theme-primary-card);
   --color-text: var(--mt-text-primary);
 }
 

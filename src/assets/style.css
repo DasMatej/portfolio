@@ -4,3 +4,19 @@
 .mt-ft-color-red{
     color: rgb(255 77 77);
 }
+.mt-circle {
+  border-radius: 15px;
+  background-color: #ff4d4d0d;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: box-shadow 0.1s ease-in-out, background-color 0.1s;
+  display: inline-block;
+}
+
+.mt-circle:hover {
+  background-color: #fc5e5e0d;
+  box-shadow: 0 0 6px rgba(255, 77, 77, 0.5);
+}
+.mt-section{
+    margin-bottom:3.5rem;
+}

@@ -9,8 +9,11 @@ export const jobs: WorkingExperience[] = [
     details:
       "Currently leading team of 3 developers, 1 tester and 1 project designer. Working on a dental app DentalSymphony that includes features like Treatment Planning Engine, Scheduler, Hard tissue Charting engine and more.",
     points: [
-      { img: "feature.png", details: "Built Treatment Planning Engine" },
-      { img: "scheduler.png", details: "Created Scheduler module" },
+      {
+        img: "icon-park-solid:add-web",
+        details: "Built Treatment Planning Engine",
+      },
+      { img: "icon-park-solid:add-web", details: "Created Scheduler module" },
     ],
     techs: [
       `ASP.NET`,
@@ -30,8 +33,11 @@ export const jobs: WorkingExperience[] = [
     details:
       "Currently leading team of 3 developers, 1 tester and 1 project designer. Working on a dental app DentalSymphony that includes features like Treatment Planning Engine, Scheduler, Hard tissue Charting engine and more.",
     points: [
-      { img: "feature.png", details: "Built Treatment Planning Engine" },
-      { img: "scheduler.png", details: "Created Scheduler module" },
+      {
+        img: "icon-park-solid:add-web",
+        details: "Built Treatment Planning Engine",
+      },
+      { img: "icon-park-solid:add-web", details: "Created Scheduler module" },
     ],
     techs: [
       `ASP.NET`,
@@ -51,8 +57,11 @@ export const jobs: WorkingExperience[] = [
     details:
       "Currently leading team of 3 developers, 1 tester and 1 project designer. Working on a dental app DentalSymphony that includes features like Treatment Planning Engine, Scheduler, Hard tissue Charting engine and more.",
     points: [
-      { img: "feature.png", details: "Built Treatment Planning Engine" },
-      { img: "scheduler.png", details: "Created Scheduler module" },
+      {
+        img: "icon-park-solid:add-web",
+        details: "Built Treatment Planning Engine",
+      },
+      { img: "icon-park-solid:add-web", details: "Created Scheduler module" },
     ],
     techs: [
       `ASP.NET`,
@@ -72,8 +81,11 @@ export const jobs: WorkingExperience[] = [
     details:
       "Currently leading team of 3 developers, 1 tester and 1 project designer. Working on a dental app DentalSymphony that includes features like Treatment Planning Engine, Scheduler, Hard tissue Charting engine and more.",
     points: [
-      { img: "feature.png", details: "Built Treatment Planning Engine" },
-      { img: "scheduler.png", details: "Created Scheduler module" },
+      {
+        img: "icon-park-solid:add-web",
+        details: "Built Treatment Planning Engine",
+      },
+      { img: "icon-park-solid:add-web", details: "Created Scheduler module" },
     ],
     techs: [
       `ASP.NET`,

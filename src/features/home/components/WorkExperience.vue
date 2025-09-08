@@ -1,5 +1,5 @@
 <template>
-  <section class="container work-experience-section">
+  <section class="mt-section container work-experience-section">
     <div class="timeline-container">
       <div class="timeline-line"></div>
       <div class="timeline-fill" ref="timelineFill"></div>
@@ -54,25 +54,15 @@ onMounted(() => {
       ease: "power3.out",
     });
 
-    ScrollTrigger.create({
-      trigger: card,
-      start: "top center",
-      end: "bottom center",
-      onEnter: () => {
-        if (timelineFill.value)
-          gsap.to(timelineFill.value, {
-            height: `${card.offsetTop + card.offsetHeight}px`,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-      },
-      onEnterBack: () => {
-        if (timelineFill.value)
-          gsap.to(timelineFill.value, {
-            height: `${card.offsetTop + card.offsetHeight}px`,
-            duration: 0.5,
-            ease: "power2.out",
-          });
+    // Smooth continuous timeline fill
+    gsap.to(timelineFill.value, {
+      height: "100%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        start: "top center",
+        end: "bottom center",
+        scrub: true, // <-- makes it follow scroll smoothly
       },
     });
   });
@@ -123,6 +113,7 @@ onMounted(() => {
   cursor: pointer;
   position: relative;
   transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: -150px;
 }
 
 .experience-card.left {

@@ -1,5 +1,5 @@
 <template>
-  <canvas id="dustCanvas" style="z-index: 0;"></canvas>
+  <canvas id="dustCanvas" style="z-index: 0; width: 100% !important;"></canvas>
 </template>
 <script setup lang="ts">
 import * as THREE from "three";

@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-wrap">
     <div v-for="value in info" class="mx-2 my-1">
-      <div class="circle">{{ value.text }}</div>
+      <div class="mt-circle">{{ value.text }}</div>
     </div>
   </div>
 </template>
@@ -21,13 +21,4 @@ const info = [
 ];
 </script>
 
-<style scoped>
-.circle {
-  border-radius: 15px;
-  background-color: #ff4d4d0d;
-  padding: 7px 14px;
-}
-.circle:hover {
-  background-color: #fc5e5e0d;
-}
-</style>
+<style scoped></style>
