@@ -1,9 +1,10 @@
 <template>
-  <canvas id="dustCanvas" style="z-index: 0; width: 100% !important;"></canvas>
+  <canvas ref="canvasRef" style="z-index: 0; width: 100% !important;"></canvas>
 </template>
+
 <script setup lang="ts">
 import * as THREE from "three";
-import { onMounted, onBeforeUnmount } from "vue";
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import type { BrandLogo } from "../types/BrandLogo";
 
 let renderer: THREE.WebGLRenderer;
@@ -11,6 +12,7 @@ let scene: THREE.Scene;
 let camera: THREE.PerspectiveCamera;
 let animationId: number;
 let starGroup: THREE.Group;
+const canvasRef = ref<HTMLCanvasElement | null>(null);
 
 function repeatLogo(file: string, size: number, count: number): BrandLogo[] {
   return Array(count)
@@ -19,7 +21,8 @@ function repeatLogo(file: string, size: number, count: number): BrandLogo[] {
 }
 
 onMounted(() => {
-  const canvas = document.getElementById("dustCanvas") as HTMLCanvasElement;
+  if (!canvasRef.value) return;
+  const canvas = canvasRef.value;
 
   scene = new THREE.Scene();
 
@@ -104,13 +107,16 @@ function onWindowResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 </script>
+
 <style scoped>
-#dustCanvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+canvas {
+  position: absolute; /* <-- important! */
+  background: radial-gradient(
+    circle at top center,
+    rgba(255, 255, 255, 0.4),
+    rgba(0, 0, 0, 0.8) 5%
+  );
+  background-position: 50% 75%;
+  background-size: 200% 100%;
 }
 </style>

@@ -55,18 +55,22 @@ const skills = [
 </script>
 <style scoped>
 .heroSection {
-  background: rgb(255, 255, 255);
-  background: radial-gradient(
-    circle at top center,
-    rgba(255, 255, 255, 0.4),
-    rgba(0, 0, 0, 0.8) 5%
-  );
-  background-position: 50% 75%;
-  background-size: 200% 100%;
+  position: relative; /* create a stacking context */
+  overflow: hidden; /* make sure canvas doesn't leak out */
 }
 
 canvas {
-  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* canvas is "background" */
+}
+
+.heroSection > *:not(canvas) {
+  position: relative;
+  z-index: 1; /* your text/content stays above */
 }
 
 .herotitle {
@@ -94,13 +98,10 @@ canvas {
   top: 0;
   height: 100%;
   width: 100%;
-  z-index: 2;
   background: linear-gradient(
     to right,
-    black,
-    transparent 10%,
-    transparent 90%,
-    black
+    var(--color-background),
+    var(--color-background)
   );
   pointer-events: none;
 }
@@ -121,7 +122,7 @@ canvas {
 
 .marqueeText {
   font-size: 18px;
-  color: var(--text-theme-secondary);
   padding: 3px 15px;
+  color: white;
 }
 </style>

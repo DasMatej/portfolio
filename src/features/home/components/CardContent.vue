@@ -1,6 +1,7 @@
 <template>
   <div
-    class="card-content"
+    class="card-content mt-border"
+    v-border-effect
     ref="cardRef"
     @mouseenter="onEnter"
     @mouseleave="onLeave"

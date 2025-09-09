@@ -1,5 +1,8 @@
 <template>
-  <section class="mt-section container work-experience-section">
+  <section
+    class="mt-section container work-experience-section"
+    style="margin-bottom: 10rem;"
+  >
     <div class="timeline-container">
       <div class="timeline-line"></div>
       <div class="timeline-fill" ref="timelineFill"></div>
@@ -107,8 +110,6 @@ onMounted(() => {
 
 .experience-card {
   width: 45%;
-  padding: 30px;
-  background-color: #ff4d4d0d;
   border-radius: 15px;
   cursor: pointer;
   position: relative;
@@ -125,7 +126,6 @@ onMounted(() => {
 }
 
 .experience-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 30px rgba(255, 77, 77, 0.3);
+  box-shadow: 30px rgba(255, 77, 77, 0.3);
 }
 </style>

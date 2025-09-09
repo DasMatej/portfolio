@@ -20,3 +20,40 @@
 .mt-section{
     margin-bottom:3.5rem;
 }
+
+.mt-border {
+  --x: 50%;
+  --y: 50%;
+
+  position: relative;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  border-radius: 20px;
+  border: 3px solid transparent;
+  padding: 2rem;
+  background: 
+    linear-gradient(var(--color-background), var(--color-background)) padding-box,
+    radial-gradient(circle at var(--x) var(--y), 
+      rgba(0, 201, 167, 0.7), 
+      rgba(132, 94, 194, 0.7), 
+      transparent 50%) border-box;
+
+  transition: background 0.2s ease;
+  z-index: 0;
+}
+
+/* Tiny subtle glow */
+.mt-border::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* only right at the border */
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--x) var(--y), 
+      rgba(0, 201, 167, 0.25), 
+      rgba(132, 94, 194, 0.25), 
+      transparent 10%);
+  filter: blur(300px); /* much smaller blur */
+  z-index: -1;
+  transition: background 0.2s ease;
+}

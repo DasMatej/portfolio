@@ -1,12 +1,17 @@
 <template>
-  <section class="mt-section container">
-    <div style="text-align: center; margin-top: 100px;">
-      <h1>Projects</h1>
-      <p>Here are some of my projects.</p>
+  <section class="mt-section container mt-border" v-border-effect>
+    <div>
+      <div class="h3">Projects</div>
     </div>
-
     <div class="projects-grid">
-      <div v-for="(project, i) in projects" :key="i" class="project-card p-4">
+      <a
+        v-for="(project, i) in projects"
+        :key="i"
+        class="project-card p-4"
+        :href="project.link"
+        target="_blank"
+        :ref="(el) => (cardRefs[i] = el as HTMLElement)"
+      >
         <div>
           <img
             v-if="project.image"
@@ -14,55 +19,70 @@
             :src="project.image"
             :alt="project.title"
           />
-          <div v-else>
-            <LandingBackground />
+        </div>
+        <div class="mt-4 h3">
+          {{ project.title }}
+        </div>
+        <div>
+          {{ project.description }}
+        </div>
+        <div class="mt-2">
+          <div
+            v-for="tech in project.techStack"
+            :key="tech.text"
+            class="mt-circle"
+          >
+            <div>{{ tech.text }}</div>
           </div>
         </div>
-        <div class="overlay">
-          <h5>{{ project.title }}</h5>
-          <p>{{ project.description }}</p>
-          <a
-            :href="project.link"
-            target="_blank"
-            class="btn btn-sm btn-primary"
-          >
-            View
-          </a>
-        </div>
-      </div>
+      </a>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import LandingBackground from "./LandingBackground.vue";
+import { ref } from "vue";
+import gsap from "gsap";
 
 let projects = [
   {
-    title: "title",
-    description: "description",
+    title: "Facebook Clone",
+    description:
+      "Created a Facebook clone with FIrebase Gooogle Authentication full login panel. Also live posting and showing across accounts. ",
     image: "/logos/facebookClone.jpg",
-    link: "projects",
+    link: "https://github.com/DasMatej/fb-clone",
+    techStack: [
+      { text: "React", link: "https://react.dev/" },
+      { text: "Redux", link: "https://redux.js.org/" },
+      { text: "Firebase", link: "https://firebase.google.com/" },
+    ],
   },
   {
-    title: "title",
-    description: "description",
+    title: "MyBrainAI",
+    description:
+      "MyBrain AI, your innovative AI companion/assistant for Discord, is here to provide a unique interaction experience.With conscious techniques to enhance AI cognition, MyBrain AI is more than just an algorithm, he is a companion.",
     image: "/logos/MyBrainAI-Logo.png",
-    link: "projects",
+    link: "https://github.com/DasMatej/MyBrainAI",
+    techStack: [],
   },
   {
     title: "Portfolio",
     description: "This portfolio",
     image: "/logos/PortfolioProject.png",
-    link: "projects",
+    link: "https://github.com/DasMatej/portfolio",
+    techStack: [],
   },
   {
-    title: "title",
-    description: "description",
-    image: "/logos/MyBrainAI-Logo.png",
+    title: "Warframe Overlay (coming soon)",
+    description:
+      "Overlay over the game Warframe to help players organise and sort out their inventory data and optimisation.",
+    image: "/logos/warframe.png",
     link: "projects",
+    techStack: [],
   },
 ];
+
+const cardRefs = ref<HTMLElement[]>([]);
 </script>
 
 <style scoped>
@@ -73,6 +93,7 @@ let projects = [
   gap: 24px; /* spacing between cards */
   justify-content: center; /* center the whole grid */
   margin-top: 50px;
+  cursor: pointer;
 }
 
 /* Card */
@@ -95,24 +116,5 @@ let projects = [
   width: 100%;
   height: 200px;
   object-fit: cover;
-}
-
-/* Overlay */
-.project-card .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s;
-  padding: 1rem;
-  text-align: center;
-}
-.project-card:hover .overlay {
-  opacity: 1;
 }
 </style>
