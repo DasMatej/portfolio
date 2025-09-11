@@ -111,6 +111,14 @@ const onLeave = () => {
   padding: 1.5rem;
   transition: transform 0.2s ease;
 }
+.card-content:after {
+  position: relative;
+  top: 50%;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background-color: green;
+}
 
 .card-content:hover {
   transform: translateY(-3px);

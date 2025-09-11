@@ -6,6 +6,7 @@
 import * as THREE from "three";
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import type { BrandLogo } from "../types/BrandLogo";
+import { spriteMap, repeatLogo } from "@/directives/spriteMap";
 
 let renderer: THREE.WebGLRenderer;
 let scene: THREE.Scene;
@@ -13,12 +14,6 @@ let camera: THREE.PerspectiveCamera;
 let animationId: number;
 let starGroup: THREE.Group;
 const canvasRef = ref<HTMLCanvasElement | null>(null);
-
-function repeatLogo(file: string, size: number, count: number): BrandLogo[] {
-  return Array(count)
-    .fill(null)
-    .map(() => ({ file, size }));
-}
 
 onMounted(() => {
   if (!canvasRef.value) return;
@@ -61,13 +56,28 @@ onMounted(() => {
   // Logos inside the same group
   const textureLoader = new THREE.TextureLoader();
   const brandLogos: BrandLogo[] = [
-    ...repeatLogo("/logos/JavaScript-logo.png", 0.4, 5),
-    ...repeatLogo("/favicon.ico", 0.4, 5),
-    ...repeatLogo("/logos/TypeScript-logo.png", 0.4, 5),
+    ...repeatLogo("typescript", 0.3, 5),
+    ...repeatLogo("vue", 0.3, 5),
+    ...repeatLogo("javascript", 0.3, 5),
+    ...repeatLogo("jquery", 0.3, 5),
+    ...repeatLogo("dotNet", 0.3, 5),
+    ...repeatLogo("python", 0.3, 5),
+    ...repeatLogo("bootstrap", 0.3, 5),
+    ...repeatLogo("cSharp", 0.3, 5),
+    ...repeatLogo("discord", 0.3, 5),
+    ...repeatLogo("mySql", 0.3, 5),
+    ...repeatLogo("react", 0.3, 5),
+    ...repeatLogo("figma", 0.3, 5),
+    ...repeatLogo("firebase", 0.3, 5),
+    ...repeatLogo("git", 0.3, 5),
   ];
 
-  brandLogos.forEach(({ file, size }) => {
+  brandLogos.forEach(({ file, size, offsetX, offsetY, repeatX, repeatY }) => {
     const tex = textureLoader.load(file);
+    tex.repeat.set(repeatX, repeatY);
+    tex.offset.set(offsetX, 1 - offsetY - repeatY); // flip Y for Three.js (Three.js flips the Y-axis of textures)
+    tex.needsUpdate = true;
+
     const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true });
     const sprite = new THREE.Sprite(spriteMat);
 

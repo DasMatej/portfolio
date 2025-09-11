@@ -8,8 +8,8 @@
       <h2 class="mt-5 text-center subtitleFont p-2 neutralFonts">
         SOFTWARE DEVELOPER
       </h2>
-      <p class="text-center subtitleFont p-2">
-        "If it works on prod, it’s a feature"
+      <p class="text-center subtitleFont p-2 fw-bold">
+        "If it works on production, it’s a feature"
       </p>
       <div class="marquee-container mt-auto container mb-lg-2 mb-5">
         <div class="marque-gradiant"></div>

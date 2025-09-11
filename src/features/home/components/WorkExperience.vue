@@ -1,7 +1,7 @@
 <template>
   <section
     class="mt-section container work-experience-section"
-    style="margin-bottom: 10rem;"
+    style="padding-bottom: 10rem;"
   >
     <div class="timeline-container">
       <div class="timeline-line"></div>
