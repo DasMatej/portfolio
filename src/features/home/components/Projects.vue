@@ -1,16 +1,16 @@
 <template>
-  <section class="mt-section container mt-border" v-border-effect>
-    <div>
-      <div class="h3">Projects</div>
-    </div>
+  <section class="mt-section container">
     <div class="projects-grid">
       <a
         v-for="(project, i) in projects"
         :key="i"
-        class="project-card p-4"
+        class="project-card p-4 mt-border"
+        v-border-effect
         :href="project.link"
         target="_blank"
         :ref="(el) => (cardRefs[i] = el as HTMLElement)"
+        @mousemove="(e) => handleMouseMove(e, i)"
+        @mouseleave="() => handleMouseLeave(i)"
       >
         <div>
           <img
@@ -48,7 +48,7 @@ let projects = [
   {
     title: "Facebook Clone",
     description:
-      "Created a Facebook clone with FIrebase Gooogle Authentication full login panel. Also live posting and showing across accounts. ",
+      "Created a Facebook clone with Firebase Google Authentication full login panel. Also live posting and showing across accounts.",
     image: "/logos/facebookClone.jpg",
     link: "https://github.com/DasMatej/fb-clone",
     techStack: [
@@ -60,7 +60,7 @@ let projects = [
   {
     title: "MyBrainAI",
     description:
-      "MyBrain AI, your innovative AI companion/assistant for Discord, is here to provide a unique interaction experience.With conscious techniques to enhance AI cognition, MyBrain AI is more than just an algorithm, he is a companion.",
+      "MyBrain AI, your innovative AI companion/assistant for Discord, is here to provide a unique interaction experience.",
     image: "/logos/MyBrainAI-Logo.png",
     link: "https://github.com/DasMatej/MyBrainAI",
     techStack: [],
@@ -80,18 +80,61 @@ let projects = [
     link: "projects",
     techStack: [],
   },
+  {
+    title: "SUS",
+    description: `DO NOT CLICK THIS PROJECT ITS NOT SAFE!!! ( Click it ;-) )`,
+    image: "/sprites/amongUs.png",
+    link: "projects",
+    techStack: [],
+  },
 ];
 
 const cardRefs = ref<HTMLElement[]>([]);
+
+// --- Tilt effect ---
+const handleMouseMove = (e: MouseEvent, index: number) => {
+  const card = cardRefs.value[index];
+  if (!card) return;
+
+  const rect = card.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+
+  const rotateX = ((y - centerY) / centerY) * 10;
+  const rotateY = ((x - centerX) / centerX) * 10;
+
+  gsap.to(card, {
+    rotationX: -rotateX,
+    rotationY: rotateY,
+    transformPerspective: 1000,
+    ease: "power2.out",
+    duration: 0.3,
+  });
+};
+
+const handleMouseLeave = (index: number) => {
+  const card = cardRefs.value[index];
+  if (!card) return;
+
+  gsap.to(card, {
+    rotationX: 0,
+    rotationY: 0,
+    ease: "power2.out",
+    duration: 0.5,
+  });
+};
 </script>
 
 <style scoped>
 /* Grid wrapper */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 360px); /* exactly 3 per row */
-  gap: 24px; /* spacing between cards */
-  justify-content: center; /* center the whole grid */
+  grid-template-columns: repeat(3, 360px);
+  gap: 24px;
+  justify-content: center;
   margin-top: 50px;
   cursor: pointer;
 }
@@ -104,12 +147,12 @@ const cardRefs = ref<HTMLElement[]>([]);
   width: 360px;
   height: 455px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.25s ease;
+  transition: transform 0.5s ease;
   background-color: var(--color-background-card);
-}
 
-.project-card:hover {
-  transform: translateY(-5px);
+  /* 3D tilt setup */
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .project-card img {

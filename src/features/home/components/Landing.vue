@@ -1,6 +1,5 @@
 <template>
   <section class="mt-section heroSection d-flex flex-column full-vh">
-    <LandingBackground />
     <div class="full-vh d-flex flex-column">
       <h1 class="text-center herotitle" style="z-index: 0;">
         MATEJ <br />DASKALOSKI
@@ -57,15 +56,6 @@ const skills = [
 .heroSection {
   position: relative; /* create a stacking context */
   overflow: hidden; /* make sure canvas doesn't leak out */
-}
-
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0; /* canvas is "background" */
 }
 
 .heroSection > *:not(canvas) {

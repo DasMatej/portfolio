@@ -57,7 +57,7 @@ onMounted(() => {
   const textureLoader = new THREE.TextureLoader();
   const brandLogos: BrandLogo[] = [
     ...repeatLogo("typescript", 0.3, 5),
-    ...repeatLogo("vue", 0.3, 5),
+    ...repeatLogo("vue", 0.3, 10),
     ...repeatLogo("javascript", 0.3, 5),
     ...repeatLogo("jquery", 0.3, 5),
     ...repeatLogo("dotNet", 0.3, 5),
@@ -67,13 +67,12 @@ onMounted(() => {
     ...repeatLogo("discord", 0.3, 5),
     ...repeatLogo("mySql", 0.3, 5),
     ...repeatLogo("react", 0.3, 5),
-    ...repeatLogo("figma", 0.3, 5),
     ...repeatLogo("firebase", 0.3, 5),
     ...repeatLogo("git", 0.3, 5),
   ];
-
+  const baseTex = textureLoader.load("/logos/sprite.png");
   brandLogos.forEach(({ file, size, offsetX, offsetY, repeatX, repeatY }) => {
-    const tex = textureLoader.load(file);
+    const tex = baseTex.clone();
     tex.repeat.set(repeatX, repeatY);
     tex.offset.set(offsetX, 1 - offsetY - repeatY); // flip Y for Three.js (Three.js flips the Y-axis of textures)
     tex.needsUpdate = true;
@@ -120,7 +119,7 @@ function onWindowResize() {
 
 <style scoped>
 canvas {
-  position: absolute; /* <-- important! */
+  position: fixed;
   background: radial-gradient(
     circle at top center,
     rgba(255, 255, 255, 0.4),
@@ -128,5 +127,10 @@ canvas {
   );
   background-position: 50% 75%;
   background-size: 200% 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* canvas is "background" */
 }
 </style>

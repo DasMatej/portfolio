@@ -52,8 +52,8 @@
   background: radial-gradient(circle at var(--x) var(--y), 
       rgba(0, 201, 167, 0.25), 
       rgba(132, 94, 194, 0.25), 
-      transparent 10%);
-  filter: blur(300px); /* much smaller blur */
+      transparent 3%);
+  filter: blur(30px); /* much smaller blur */
   z-index: -1;
   transition: background 0.2s ease;
 }

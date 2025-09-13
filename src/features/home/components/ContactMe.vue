@@ -73,7 +73,6 @@ onMounted(() => {
   }
 
   // Load holding sprites
-  const holdTex = loader.load("/sprites/Base/Vent0003.png");
   const holdLeftTex = loader.load(
     "/sprites/Base/deaths/killalien_victim0023.png"
   );
@@ -97,29 +96,37 @@ onMounted(() => {
   );
   scene.add(spriteMesh);
 
-  // Movement & animation
-  let vy = -2;
-  let landed = false;
+  // ---------------------------
+  // Physics + Animation Vars
+  // ---------------------------
   let vx = 2;
+  let vy = 0;
+  const gravity = -0.5;
+  const bounceFactor = 0.6;
+  const floorY = 40;
+
   let currentFrame = 0;
   let frameAccumulator = 0;
   const frameSpeed = 0.2;
 
-  // Dragging variables
+  // Dragging
   let isDragging = false;
   let lastPointerX = 0;
+  let lastPointerY = 0;
+  let lastMoveTime = 0;
 
+  // ---------------------------
+  // Pointer Events
+  // ---------------------------
   canvas.value.addEventListener("pointerdown", (e) => {
     if (!canvas.value) return;
     const rect = canvas.value.getBoundingClientRect();
 
-    // Convert mouse to canvas coordinates
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    // Convert to scene coordinates
     const sceneX = mouseX;
-    const sceneY = container.value!.clientHeight - mouseY; // invert Y
+    const sceneY = container.value!.clientHeight - mouseY;
 
     const dx = sceneX - spriteMesh.position.x;
     const dy = sceneY - spriteMesh.position.y;
@@ -127,6 +134,10 @@ onMounted(() => {
     if (Math.abs(dx) < planeWidth / 2 && Math.abs(dy) < planeHeight / 2) {
       isDragging = true;
       lastPointerX = sceneX;
+      lastPointerY = sceneY;
+      lastMoveTime = performance.now();
+      vx = 0; // reset while dragging
+      vy = 0;
     }
   });
 
@@ -136,59 +147,68 @@ onMounted(() => {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    // Convert to scene coordinates
     const sceneX = mouseX;
     const sceneY = container.value!.clientHeight - mouseY;
 
-    // Move sprite
+    // compute velocity from drag delta
+    const now = performance.now();
+    const dt = (now - lastMoveTime) / 16; // normalize ~60fps
+    vx = (sceneX - lastPointerX) / dt;
+    vy = (sceneY - lastPointerY) / dt;
+
     spriteMesh.position.x = sceneX;
     spriteMesh.position.y = sceneY;
 
-    // Swap textures based on movement direction
     const dx = sceneX - lastPointerX;
     if (dx > 0) spriteMesh.material.map = holdRightTex;
     else if (dx < 0) spriteMesh.material.map = holdLeftTex;
-    else spriteMesh.material.map = holdTex;
 
     lastPointerX = sceneX;
+    lastPointerY = sceneY;
+    lastMoveTime = now;
   });
 
   canvas.value.addEventListener("pointerup", () => {
     if (!isDragging) return;
-
     isDragging = false;
-    landed = false; // allow falling again
-    vy = -2; // reset fall speed
-    spriteMesh.material.map = frames[currentFrame]; // resume walking animation
+    spriteMesh.material.map = frames[currentFrame]; // resume walk anim
   });
 
+  // ---------------------------
+  // Animation Loop
+  // ---------------------------
   function animate() {
     requestAnimationFrame(animate);
 
     if (!isDragging) {
-      // Fall
-      if (!landed) {
-        spriteMesh.position.y += vy;
-        if (spriteMesh.position.y <= 40) {
-          spriteMesh.position.y = 40;
-          landed = true;
-        }
-      } else {
-        // Horizontal movement
-        spriteMesh.position.x += vx;
+      // apply physics
+      spriteMesh.position.x += vx;
+      spriteMesh.position.y += vy;
 
-        // Bounce
-        if (
-          spriteMesh.position.x > container.value!.clientWidth - 50 ||
-          spriteMesh.position.x < 50
-        ) {
-          vx = -vx;
-        }
+      vy += gravity;
 
-        // Flip left/right
-        spriteMesh.scale.x = vx > 0 ? 1 : -1;
+      // floor collision
+      if (spriteMesh.position.y <= floorY) {
+        spriteMesh.position.y = floorY;
+        vy = 0;
+        vx *= 0.8; // floor friction
+      }
 
-        // Update animation frame
+      // wall bounce
+      if (spriteMesh.position.x >= container.value!.clientWidth - planeWidth / 2) {
+        spriteMesh.position.x = container.value!.clientWidth - planeWidth / 2;
+        vx = -vx * bounceFactor;
+      }
+      if (spriteMesh.position.x <= planeWidth / 2) {
+        spriteMesh.position.x = planeWidth / 2;
+        vx = -vx * bounceFactor;
+      }
+
+      // flip sprite
+      if (vx !== 0) spriteMesh.scale.x = vx > 0 ? 1 : -1;
+
+      // walking animation when on floor
+      if (spriteMesh.position.y <= floorY && Math.abs(vx) > 0.5) {
         frameAccumulator += frameSpeed;
         if (frameAccumulator >= 1) {
           frameAccumulator = 0;
@@ -233,11 +253,11 @@ onMounted(() => {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 0; /* lowest */
+  z-index: 0;
 }
 /* Contact form sits above the canvas */
 .form-control {
   position: relative;
-  z-index: 1; /* higher than canvas */
+  z-index: 1;
 }
 </style>
