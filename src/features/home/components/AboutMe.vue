@@ -1,6 +1,6 @@
 <template>
   <section
-    class="mt-section container mt-border about-section"
+    class="mt-section container mt-border about-section hover-wave"
     style="margin-top: 7rem;"
     v-border-effect
   >
@@ -10,7 +10,7 @@
           <div class="display-4 mb-3">
             <div class="h1">Hi, I'm</div>
             <div class="mt-ft-color-red fw-bold">Matej Daskaloski</div>
-            <div class="mt-ft-color-red fw-bold hover-wave">
+            <div class="mt-ft-color-red fw-bold">
               <!-- Wrap each letter in span -->
               <span>S</span><span>o</span><span>f</span><span>t</span
               ><span>w</span><span>a</span><span>r</span><span>e</span>
