@@ -7,28 +7,7 @@
     <canvas ref="canvas" class="bg-canvas"></canvas>
 
     <div>
-      <div class="h3">Contact Me</div>
-      <div class="contact-form row">
-        <div class="col-5">
-          <div>
-            <label>Name</label>
-            <input class="form-control" />
-          </div>
-          <div>
-            <label>Email</label>
-            <input class="form-control" />
-          </div>
-          <div>
-            <label>Message</label>
-            <textarea class="form-control"></textarea>
-          </div>
-        </div>
-        <div class="col-7 d-flex justify-content-center align-items-center">
-          <div style="width:200px; height: 200px;" >
-            <img class="img-fluid" src="/sprites/amongUs.png"></img>
-          </div>
-        </div>
-      </div>
+      <EmailForm />
     </div>
   </section>
 </template>
@@ -36,7 +15,9 @@
 <script setup lang="ts">
 import { onMounted, ref, onUnmounted } from "vue";
 import * as THREE from "three";
+import EmailForm from "./EmailForm.vue";
 
+//TODO: By the end of the project seporate this into it's onw project with clean code and reusable functionality.
 const container = ref<HTMLElement | null>(null);
 const canvas = ref<HTMLCanvasElement | null>(null);
 
@@ -103,11 +84,16 @@ onMounted(() => {
   let vy = 0;
   const gravity = -0.5;
   const bounceFactor = 0.6;
-  const floorY = 40;
+  const floorY = 48;
+  const roofY = 358;
 
   let currentFrame = 0;
   let frameAccumulator = 0;
   const frameSpeed = 0.2;
+  const bounceThreshold = 4;
+
+  const minWalkSpeed = 2.5;
+  const maxBounceDamping = 0.8;
 
   // Dragging
   let isDragging = false;
@@ -189,19 +175,41 @@ onMounted(() => {
 
       // floor collision
       if (spriteMesh.position.y <= floorY) {
-        spriteMesh.position.y = floorY;
-        vy = 0;
-        vx *= 0.8; // floor friction
+        if (vy < -bounceThreshold) {
+          // bouncing back
+          spriteMesh.position.y = floorY + 1; // slightly above floor to prevent sticking
+          vy = -vy * bounceFactor;
+        } else {
+          // landed
+          spriteMesh.position.y = floorY;
+          vy = 0;
+
+          if (Math.abs(vx) > minWalkSpeed) {
+            vx *= 0.8; // friction
+          } else {
+            vx = (spriteMesh.scale.x > 0 ? 1 : -1) * minWalkSpeed;
+          }
+        }
+      }
+
+      // roof collision
+      if (spriteMesh.position.y >= roofY) {
+        spriteMesh.position.y = roofY;
+        vy = -Math.abs(vy) * bounceFactor; // bounce downward
       }
 
       // wall bounce
-      if (spriteMesh.position.x >= container.value!.clientWidth - planeWidth / 2) {
+      if (
+        spriteMesh.position.x >=
+        container.value!.clientWidth - planeWidth / 2
+      ) {
         spriteMesh.position.x = container.value!.clientWidth - planeWidth / 2;
-        vx = -vx * bounceFactor;
+        vx =
+          -Math.max(Math.abs(vx) * bounceFactor, minWalkSpeed) * Math.sign(vx);
       }
       if (spriteMesh.position.x <= planeWidth / 2) {
         spriteMesh.position.x = planeWidth / 2;
-        vx = -vx * bounceFactor;
+        vx = Math.max(Math.abs(vx) * bounceFactor, minWalkSpeed);
       }
 
       // flip sprite

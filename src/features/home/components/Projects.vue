@@ -82,7 +82,7 @@ let projects = [
   },
   {
     title: "SUS",
-    description: `DO NOT CLICK THIS PROJECT ITS NOT SAFE!!! ( Click it ;-) )`,
+    description: `DO NOT CLICK THIS PROJECT ITS NOT SAFE!!! ( Click it ;-) ). It is going to be stand alone git project soon.`,
     image: "/sprites/amongUs.png",
     link: "projects",
     techStack: [],
