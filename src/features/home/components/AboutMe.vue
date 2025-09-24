@@ -26,10 +26,6 @@
             realm of software development. The challenge and potential for
             creativity in this field continually drive me to learn and grow.
           </div>
-          <div class="about-buttons">
-            <div>Button</div>
-            <div>Button2</div>
-          </div>
         </div>
         <div class="col-6 about-right">
           <div class="mb-3">

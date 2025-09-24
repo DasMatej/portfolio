@@ -5,8 +5,8 @@
     v-border-effect
   >
     <canvas ref="canvas" class="bg-canvas"></canvas>
-
     <div>
+      <div class="h2" style="color: #b2ffff;">Contact Me</div>
       <EmailForm />
     </div>
   </section>
@@ -106,6 +106,7 @@ onMounted(() => {
   // ---------------------------
   canvas.value.addEventListener("pointerdown", (e) => {
     if (!canvas.value) return;
+
     const rect = canvas.value.getBoundingClientRect();
 
     const mouseX = e.clientX - rect.left;
@@ -124,6 +125,8 @@ onMounted(() => {
       lastMoveTime = performance.now();
       vx = 0; // reset while dragging
       vy = 0;
+      // bring canvas above inputs while dragging
+      canvas.value.style.zIndex = "9999";
     }
   });
 
@@ -158,6 +161,9 @@ onMounted(() => {
     if (!isDragging) return;
     isDragging = false;
     spriteMesh.material.map = frames[currentFrame]; // resume walk anim
+
+    // send canvas back behind inputs
+    canvas.value!.style.zIndex = "0";
   });
 
   // ---------------------------
@@ -235,10 +241,17 @@ onMounted(() => {
   // Resize handling
   const handleResize = () => {
     if (!container.value) return;
-    camera.right = container.value.clientWidth;
-    camera.bottom = container.value.clientHeight;
+
+    const w = container.value.clientWidth;
+    const h = container.value.clientHeight;
+
+    camera.left = 0;
+    camera.right = w;
+    camera.top = h;
+    camera.bottom = 0;
     camera.updateProjectionMatrix();
-    renderer.setSize(container.value.clientWidth, container.value.clientHeight);
+
+    renderer.setSize(w, h);
   };
   window.addEventListener("resize", handleResize);
 

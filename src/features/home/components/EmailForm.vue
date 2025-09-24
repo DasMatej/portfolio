@@ -86,7 +86,7 @@ const sendEmail = () => {
   position: relative;
   z-index: 1;
   color: #e0ffff; /* light cyan text */
-  border: 2px solid #00ffff;
+  border: 2px solid #ff4d4d55;
   border-radius: 10px;
   transition: all 0.3s ease;
   background-color: rgb(49, 49, 49);
@@ -94,12 +94,12 @@ const sendEmail = () => {
 
 .form-control:focus {
   outline: none;
-  border-color: #00ffff;
-  box-shadow: 0 0 10px #00ffff;
+  border-color: #00ffff2a;
+  box-shadow: 0 0 10px #00ffff31;
   background-color: #061010; /* slightly darker on focus */
 }
 .form-label {
-  color: #00ffff; /* cyan label */
+  color: #b2ffff; /* cyan label */
   font-weight: bold;
   margin-bottom: 0.3rem;
 }
