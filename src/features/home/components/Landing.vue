@@ -27,8 +27,6 @@
   </section>
 </template>
 <script setup lang="ts">
-import LandingBackground from "./LandingBackground.vue";
-
 const skills = [
   "JavaScript",
   "TypeScript",

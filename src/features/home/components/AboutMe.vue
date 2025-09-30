@@ -6,7 +6,7 @@
   >
     <div class="mt-3">
       <div class="row mb-5">
-        <div class="col-6 about-left">
+        <div class="col-12 col-lg-6 mb-lg-0 mb-4 about-left">
           <div class="display-4 mb-3">
             <div class="h1">Hi, I'm</div>
             <div class="mt-ft-color-red fw-bold">Matej Daskaloski</div>
@@ -27,7 +27,7 @@
             creativity in this field continually drive me to learn and grow.
           </div>
         </div>
-        <div class="col-6 about-right">
+        <div class="col-12 col-lg-6 about-right">
           <div class="mb-3">
             <div class="h4">Key Skills</div>
             <KeySkills />
@@ -145,5 +145,10 @@ onMounted(() => {
 }
 .fall-e {
   display: inline-block;
+}
+@media only screen and (max-width: 1200px) {
+  .mt-ft-color-red {
+    font-size: 3rem;
+  }
 }
 </style>

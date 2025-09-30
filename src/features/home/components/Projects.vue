@@ -73,16 +73,8 @@ let projects = [
     techStack: [],
   },
   {
-    title: "Warframe Overlay (coming soon)",
-    description:
-      "Overlay over the game Warframe to help players organise and sort out their inventory data and optimisation.",
-    image: "/logos/warframe.png",
-    link: "projects",
-    techStack: [],
-  },
-  {
-    title: "SUS",
-    description: `DO NOT CLICK THIS PROJECT ITS NOT SAFE!!! ( Click it ;-) ). It is going to be stand alone git project soon.`,
+    title: "SUS character",
+    description: `The caracter is going to be stand alone git project soon.`,
     image: "/sprites/amongUs.png",
     link: "projects",
     techStack: [],
