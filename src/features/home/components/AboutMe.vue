@@ -56,7 +56,7 @@ import KeySkills from "./KeySkills.vue";
 gsap.registerPlugin(ScrollTrigger);
 
 onMounted(() => {
-  // Existing scroll animations
+  // Scroll animations (keep as-is)
   gsap.from(".about-left", {
     scrollTrigger: {
       trigger: ".about-section",
@@ -89,17 +89,16 @@ onMounted(() => {
     delay: 0.4,
   });
 
-  // Wave + falling e
+  // Wave + falling e (auto loop)
   const container = document.querySelector(".hover-wave");
   const letters = container?.querySelectorAll("span");
   const fallingE = container?.querySelector(".fall-e");
 
   if (container && letters && fallingE) {
-    // Create a GSAP timeline, paused initially
     const waveTl = gsap.timeline({ paused: true });
 
     letters.forEach((letter, index) => {
-      if (letter === fallingE) return; // skip falling e
+      if (letter === fallingE) return;
       waveTl.to(
         letter,
         {
@@ -110,10 +109,9 @@ onMounted(() => {
           repeat: 1,
         },
         index * 0.1
-      ); // stagger using position in timeline
+      );
     });
 
-    // Falling "e" at the end
     const fallingIndex = Array.from(letters).indexOf(fallingE as any);
     waveTl.to(
       fallingE,
@@ -125,16 +123,22 @@ onMounted(() => {
         ease: "bounce.in",
       },
       fallingIndex * 0.1
-    ); // delayed so wave reaches it
+    );
 
-    // Hover controls
-    container.addEventListener("mouseenter", () => {
-      waveTl.play();
-    });
+    // Looping logic
+    const loopAnimation = () => {
+      waveTl.restart(); // play forward
+      waveTl.eventCallback("onComplete", () => {
+        gsap.delayedCall(3, () => {
+          waveTl.reverse(); // play backward
+          waveTl.eventCallback("onReverseComplete", () => {
+            gsap.delayedCall(3, loopAnimation); // restart loop after delay
+          });
+        });
+      });
+    };
 
-    container.addEventListener("mouseleave", () => {
-      waveTl.reverse();
-    });
+    loopAnimation(); // start the cycle
   }
 });
 </script>

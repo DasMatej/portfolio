@@ -1,10 +1,10 @@
 <template>
   <section class="mt-section container">
-    <div class="projects-grid">
+    <div class="row">
       <a
         v-for="(project, i) in projects"
         :key="i"
-        class="project-card p-4 mt-border"
+        class="project-card p-4 mt-border col-12 col-md-6 col-lg-4"
         v-border-effect
         :href="project.link"
         target="_blank"
@@ -121,32 +121,6 @@ const handleMouseLeave = (index: number) => {
 </script>
 
 <style scoped>
-/* Grid wrapper */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 360px);
-  gap: 24px;
-  justify-content: center;
-  margin-top: 50px;
-  cursor: pointer;
-}
-
-/* Card */
-.project-card {
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  width: 360px;
-  height: 455px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.5s ease;
-  background-color: var(--color-background-card);
-
-  /* 3D tilt setup */
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
 .project-card img {
   width: 100%;
   height: 200px;
