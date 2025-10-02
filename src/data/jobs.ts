@@ -1,4 +1,5 @@
 import type { WorkingExperience } from "@/features/home/types/WorkingExperience";
+import { skills } from "./skills";
 export const jobs: WorkingExperience[] = [
   {
     year: "2022 - Present",
@@ -35,13 +36,16 @@ export const jobs: WorkingExperience[] = [
           "Mentored junior developers and established best practices in code reviews, testing, and agile processes.",
       },
     ],
-    techs: [
-      `ASP.NET`,
-      `Microsoft SQL Server`,
-      `SQL`,
-      `jQuery`,
-      `Vanila Javascript`,
-    ],
+    techs: skills.filter((skill) =>
+      [
+        "ASP.NET",
+        "JavaScript",
+        "C#",
+        "Microsoft SQL Server",
+        "SQL",
+        "jQuery",
+      ].includes(skill.title)
+    ),
     isPresent: true,
   },
   {
@@ -89,13 +93,11 @@ export const jobs: WorkingExperience[] = [
           "Migrated legacy features into the new system, improving performance and maintainability while preserving business-critical functionality.",
       },
     ],
-    techs: [
-      `ASP.NET`,
-      `Microsoft SQL Server`,
-      `SQL`,
-      `jQuery`,
-      `Vanila Javascript`,
-    ],
+    techs: skills.filter((skill) =>
+      ["Vue.js", "JavaScript", "TypeScript", "Pinia", "Python", "SQL"].includes(
+        skill.title
+      )
+    ),
     isPresent: false,
   },
   {
@@ -133,7 +135,16 @@ export const jobs: WorkingExperience[] = [
           "Worked closely with senior developers, applying mentorship feedback to improve coding standards and best practices.",
       },
     ],
-    techs: [`Algorithms`, `Javascript`, `Vue.js`, `jQuery`, `TypeScript`],
+    techs: skills.filter((skill) =>
+      [
+        "Vue.js",
+        "JavaScript",
+        "TypeScript",
+        "Algorithms",
+        ".NET",
+        "SQL",
+      ].includes(skill.title)
+    ),
     isPresent: false,
   },
 ];

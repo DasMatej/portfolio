@@ -1,3 +1,4 @@
+import type { SkillBubble } from "./SkillBubble";
 export interface WorkingExperience {
   year: string;
   workingTime?: string;
@@ -6,7 +7,7 @@ export interface WorkingExperience {
   location?: string;
   details: string;
   points?: Points[];
-  techs?: string[];
+  techs?: Partial<SkillBubble>[];
   isPresent?: boolean;
 }
 export type Points = {

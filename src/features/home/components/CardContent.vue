@@ -34,24 +34,24 @@
 
     <!-- Points -->
     <ul class="points" v-if="job.points?.length">
-      <li v-for="(point, i) in job.points" :key="i">
-        <Icon
-          v-if="point.img"
-          :icon="point.img"
-          :alt="point.details"
-          width="24"
-          height="24"
-          class="mt-ft-color-red me-2 point-icon"
-        />
-        <span>{{ point.details }}</span>
-      </li>
+      <div v-for="(point, i) in job.points" :key="i" class="mb-2">
+        <div class="d-flex">
+          <div class="">
+            <Icon
+              v-if="point.img"
+              :icon="point.img"
+              :alt="point.details"
+              class="mt-ft-color-red me-2 point-icon"
+            />
+          </div>
+          <div class="">{{ point.details }}</div>
+        </div>
+      </div>
     </ul>
 
     <!-- Tech stack -->
     <div class="tech-stack" v-if="job.techs?.length">
-      <span v-for="(tech, i) in job.techs" :key="i" class="mt-circle">
-        {{ tech }}
-      </span>
+      <SkillBubbles :skills="job.techs" />
     </div>
   </div>
 </template>
@@ -60,6 +60,7 @@
 import { ref } from "vue";
 import gsap from "gsap";
 import type { WorkingExperience } from "../types/WorkingExperience";
+import SkillBubbles from "./SkillBubbles.vue";
 const props = defineProps<{
   job: Partial<WorkingExperience>;
 }>();

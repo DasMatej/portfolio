@@ -6,8 +6,61 @@
   >
     <canvas ref="canvas" class="bg-canvas"></canvas>
     <div>
-      <div class="h2" style="color: #b2ffff;">Contact Me</div>
-      <EmailForm />
+      <div class="h2 d-flex justify-content-center">Contact Me</div>
+      <div class="row mt-4">
+        <div class="col-12 col-md-6">
+          <div>
+            <EmailForm />
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="direct-contact-container mt-3 mt-md-0">
+            <div>
+              <div class="list-item d-flex align-items-center mb-3">
+                <div>
+                  <Icon icon="fa:map-marker" width="24" />
+                  Skopje, Macedonia
+                </div>
+              </div>
+              <div class="list-item d-flex align-items-center mb-3">
+                <a href="mailto:dasmatej7@gmail.com" title="Send me an email">
+                  <Icon icon="fa:envelope" width="24" />
+                  dasmatej7@gmail.com
+                </a>
+              </div>
+              <div class="list-item d-flex align-items-center mb-3">
+                <a
+                  href="https://github.com/DasMatej"
+                  target="_blank"
+                  title="Link to my github page"
+                >
+                  <Icon icon="fa:github" width="24" />
+                  DasMatej
+                </a>
+              </div>
+              <div class="list-item d-flex align-items-center">
+                <a
+                  href="https://www.linkedin.com/in/matej-daskaloski-ba7b69212/"
+                  target="_blank"
+                  title="Link to my github page"
+                >
+                  <Icon icon="fa:linkedin" width="24" />
+                  Matej Daskaloski
+                </a>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <p class="closing-text">
+            I’m always open to new opportunities, collaborations, or just a
+            chat. Feel free to reach out!
+          </p>
+          <p class="closing-text">
+            (Also you can throw around the running dummy try grabbing and
+            throwing him)
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -85,7 +138,7 @@ onMounted(() => {
   const gravity = -0.5;
   const bounceFactor = 0.6;
   const floorY = 48;
-  const roofY = 358;
+  let roofY = container.value.clientHeight;
 
   let currentFrame = 0;
   let frameAccumulator = 0;
@@ -243,15 +296,15 @@ onMounted(() => {
     if (!container.value) return;
 
     const w = container.value.clientWidth;
-    const h = container.value.clientHeight;
+    roofY = container.value.clientHeight;
 
     camera.left = 0;
     camera.right = w;
-    camera.top = h;
+    camera.top = roofY;
     camera.bottom = 0;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(w, h);
+    renderer.setSize(w, roofY);
   };
   window.addEventListener("resize", handleResize);
 
@@ -265,7 +318,6 @@ onMounted(() => {
 .container {
   position: relative;
   width: 100%;
-  height: 400px;
   overflow: hidden;
 }
 
@@ -280,5 +332,47 @@ onMounted(() => {
 .form-control {
   position: relative;
   z-index: 1;
+}
+
+/* Begin Right Contact Page */
+.direct-contact-container {
+  max-width: 400px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  color: #aaa;
+  z-index: 1;
+  font: 300 18px "Lato", sans-serif;
+  letter-spacing: 1.9px;
+}
+.list-item a {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid var(--mt-color-green);
+}
+.list-item a svg,
+.list-item div svg {
+  margin-right: 1rem;
+}
+.list-item div {
+  z-index: 1;
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid var(--mt-clor-green);
+}
+
+hr {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.closing-text {
+  margin-top: 1rem;
+  font: 300 16px "Lato", sans-serif;
+  color: #aaa;
+  text-align: center;
 }
 </style>

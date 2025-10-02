@@ -27,13 +27,7 @@
           {{ project.description }}
         </div>
         <div class="mt-2">
-          <div
-            v-for="tech in project.techStack"
-            :key="tech.text"
-            class="mt-circle"
-          >
-            <div>{{ tech.text }}</div>
-          </div>
+          <SkillBubbles :skills="project.techStack" />
         </div>
       </a>
     </div>
@@ -43,7 +37,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import gsap from "gsap";
-
+import SkillBubbles from "./SkillBubbles.vue";
+import { skills } from "@/data/skills";
 let projects = [
   {
     title: "Facebook Clone",
@@ -51,11 +46,9 @@ let projects = [
       "Created a Facebook clone with Firebase Google Authentication full login panel. Also live posting and showing across accounts.",
     image: "/logos/facebookClone.jpg",
     link: "https://github.com/DasMatej/fb-clone",
-    techStack: [
-      { text: "React", link: "https://react.dev/" },
-      { text: "Redux", link: "https://redux.js.org/" },
-      { text: "Firebase", link: "https://firebase.google.com/" },
-    ],
+    techStack: skills.filter((x) =>
+      ["React.js", "Redux", "Material UI", "Firebase"].includes(x.title)
+    ),
   },
   {
     title: "MyBrainAI",
@@ -63,18 +56,37 @@ let projects = [
       "MyBrain AI, your innovative AI companion/assistant for Discord, is here to provide a unique interaction experience.",
     image: "/logos/MyBrainAI-Logo.png",
     link: "https://github.com/DasMatej/MyBrainAI",
-    techStack: [],
+    techStack: skills.filter((x) =>
+      [
+        "Discord API",
+        "Google Search API",
+        "Python",
+        "OpenAI API",
+        "Firebase",
+        "BeautifulSoup",
+      ].includes(x.title)
+    ),
   },
   {
     title: "Portfolio",
-    description: "This portfolio",
+    description:
+      "This portfolio is built with Vue 3 and Vite for a fast, modern development stack, and written entirely in TypeScript for type safety and scalability. The page features a fully interactive 3D character model and a dynamic space-themed background, both powered by Three.js for immersive WebGL rendering.",
     image: "/logos/PortfolioProject.png",
     link: "https://github.com/DasMatej/portfolio",
-    techStack: [],
+    techStack: skills.filter((x) =>
+      [
+        "Discord API",
+        "Google Search API",
+        "Python",
+        "OpenAI API",
+        "Firebase",
+        "BeautifulSoup",
+      ].includes(x.title)
+    ),
   },
   {
     title: "SUS character",
-    description: `The caracter is going to be stand alone git project soon.`,
+    description: `The running dummy is going to be stand alone git project soon.`,
     image: "/sprites/amongUs.png",
     link: "projects",
     techStack: [],

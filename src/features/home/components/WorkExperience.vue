@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="mt-section container work-experience-section"
-    style="padding-bottom: 10rem;"
-  >
+  <section class="mt-section container work-experience-section">
     <div class="timeline-container">
       <div class="timeline-line"></div>
       <div class="timeline-fill" ref="timelineFill"></div>
@@ -74,7 +71,7 @@ onMounted(() => {
 <style scoped>
 .work-experience-section {
   position: relative;
-  padding: 100px 20px;
+  padding-bottom: 10rem;
 }
 
 .timeline-container {
@@ -127,5 +124,24 @@ onMounted(() => {
 
 .experience-card:hover {
   box-shadow: 30px rgba(255, 77, 77, 0.3);
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .timeline-container {
+    display: none;
+  }
+
+  .experience-card {
+    width: 100%;
+    margin-bottom: 2rem;
+    align-self: flex-start !important;
+  }
+  .work-experience-section {
+    padding-bottom: 0rem;
+  }
+  .experience-card:last-child {
+    margin-bottom: 0px !important;
+  }
 }
 </style>

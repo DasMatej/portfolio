@@ -1,3 +1,46 @@
+<template>
+  <div class="contact-form">
+    <div class="flex-fill">
+      <div class="form-label">Name</div>
+      <input v-model="name" class="form-control mt-input" />
+    </div>
+
+    <div class="flex-fill">
+      <div class="form-label">Email</div>
+      <input
+        v-model="email"
+        class="form-control mt-input"
+        :class="{ 'error-border': emailError }"
+      />
+      <!-- Always rendered but space is reserved -->
+      <div class="error-message" :class="{ visible: emailError }">
+        Invalid email address
+      </div>
+    </div>
+
+    <div>
+      <div class="form-label">Message</div>
+      <textarea v-model="message" class="form-control mt-input"></textarea>
+    </div>
+
+    <div>
+      <button
+        class="mt-btn mt-3 send-button"
+        @click="sendEmail"
+        :disabled="isSending"
+      >
+        <div v-if="!isSending">
+          <div class="alt-send-button">
+            <Icon icon="fa:send" class="img-fluid mb-1 me-2" />
+            <span class="send-text">SEND</span>
+          </div>
+        </div>
+        <div v-else class="loader"></div>
+      </button>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref } from "vue";
 import emailjs from "emailjs-com";
@@ -20,7 +63,7 @@ const sendEmail = () => {
   } else {
     emailError.value = false;
   }
-  if (isSending.value) return; // prevent multiple clicks
+  if (isSending.value) return;
 
   isSending.value = true;
 
@@ -52,40 +95,11 @@ const sendEmail = () => {
 };
 </script>
 
-<template>
-  <div class="contact-form w-50">
-    <div class="d-flex">
-      <div class="flex-fill me-4">
-        <div class="form-label">Name</div>
-        <input v-model="name" class="form-control mt-input" />
-      </div>
-      <div class="flex-fill">
-        <div class="form-label">Email</div>
-        <input
-          v-model="email"
-          class="form-control mt-input"
-          :class="{ 'error-border': emailError }"
-        />
-        <div v-if="emailError" class="text-danger">Invalid email address</div>
-      </div>
-    </div>
-    <div>
-      <div class="form-label">Message</div>
-      <textarea v-model="message" class="form-control mt-input"></textarea>
-    </div>
-    <div class="">
-      <button class="mt-btn mt-3" @click="sendEmail" :disabled="isSending">
-        <span v-if="!isSending">Send</span>
-        <span v-else class="loader"></span>
-      </button>
-    </div>
-  </div>
-</template>
 <style scoped>
 .form-control {
   position: relative;
   z-index: 1;
-  color: #e0ffff; /* light cyan text */
+  color: #e0ffff;
   border: 2px solid #ff4d4d55;
   border-radius: 10px;
   transition: all 0.3s ease;
@@ -96,10 +110,10 @@ const sendEmail = () => {
   outline: none;
   border-color: #00ffff2a;
   box-shadow: 0 0 10px #00ffff31;
-  background-color: #061010; /* slightly darker on focus */
+  background-color: #061010;
 }
+
 .form-label {
-  color: #b2ffff; /* cyan label */
   font-weight: bold;
   margin-bottom: 0.3rem;
 }
@@ -110,7 +124,13 @@ const sendEmail = () => {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #00ffff, #008b8b);
+  background: linear-gradient(135deg, #ff4d4d, #ff1a1a),
+    radial-gradient(
+      circle at 70% 20%,
+      rgba(0, 201, 167, 0.25),
+      rgba(132, 94, 194, 0.25),
+      transparent 60%
+    );
   color: #000;
   font-weight: bold;
   border: none;
@@ -132,8 +152,8 @@ const sendEmail = () => {
 
 /* Loader inside button */
 .loader {
-  border: 3px solid #e0ffff; /* light cyan */
-  border-top: 3px solid #008b8b; /* darker cyan */
+  border: 3px solid #e0ffff;
+  border-top: 3px solid #008b8b;
   border-radius: 50%;
   width: 18px;
   height: 18px;
@@ -156,5 +176,17 @@ textarea.form-control {
 
 .error-border {
   border: 2px solid rgb(220, 53, 69);
+}
+
+/* Reserve space for error without pushing layout */
+.error-message {
+  min-height: 1.2em;
+  font-size: 0.9rem;
+  color: rgb(220, 53, 69);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.error-message.visible {
+  opacity: 1;
 }
 </style>
