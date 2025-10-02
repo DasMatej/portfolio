@@ -44,7 +44,7 @@
                   target="_blank"
                   title="Link to my github page"
                 >
-                  <Icon icon="fa:linkedin" width="24" />
+                  <Icon icon="fa:linkedin" width="20" />
                   Matej Daskaloski
                 </a>
               </div>

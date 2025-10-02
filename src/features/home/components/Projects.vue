@@ -88,7 +88,6 @@ let projects = [
     title: "SUS character",
     description: `The running dummy is going to be stand alone git project soon.`,
     image: "/sprites/amongUs.png",
-    link: "projects",
     techStack: [],
   },
 ];
