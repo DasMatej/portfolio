@@ -74,21 +74,17 @@ let projects = [
     image: "/logos/PortfolioProject.png",
     link: "https://github.com/DasMatej/portfolio",
     techStack: skills.filter((x) =>
-      [
-        "Discord API",
-        "Google Search API",
-        "Python",
-        "OpenAI API",
-        "Firebase",
-        "BeautifulSoup",
-      ].includes(x.title)
+      ["Vue.js", "TypeScript", "Three.js", "GSAP"].includes(x.title)
     ),
   },
   {
     title: "SUS character",
     description: `The running dummy is going to be stand alone git project soon.`,
     image: "/sprites/amongUs.png",
-    techStack: [],
+    link: "https://github.com/DasMatej/portfolio",
+    techStack: skills.filter((x) =>
+      ["JavaScript", "Three.js"].includes(x.title)
+    ),
   },
 ];
 

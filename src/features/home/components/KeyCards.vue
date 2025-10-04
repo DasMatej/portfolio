@@ -1,6 +1,10 @@
 <template>
   <div class="row">
-    <div v-for="(value, i) in info" :key="i" class="col-3">
+    <div
+      v-for="(value, i) in info"
+      :key="i"
+      class="col-lg-3 col-md-6 col-12 mb-md-2 mb-sm-3"
+    >
       <div class="circle">
         <div class="wave"></div>
         <div class="circle-text main">{{ value.text }}</div>

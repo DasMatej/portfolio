@@ -29,4 +29,6 @@ export const skills: SkillBubble[] = [
   { title: "Google Search API", color: "219, 68, 55" }, // rgba(255, 122, 110, 1)
   { title: "OpenAI API", color: "15, 158, 123" }, // #0f9e7b
   { title: "BeautifulSoup", color: "255, 122, 55" }, // #hsl(210, 100%, 45%)
+  { title: "Three.js", color: "145, 151, 156" }, // #rgba(145, 151, 156, 1)
+  { title: "GSAP", color: "78, 222, 59" }, // #rgba(78, 222, 59, 1)
 ];
