@@ -17,10 +17,13 @@
           <div class="direct-contact-container mt-3 mt-md-0">
             <div>
               <div class="list-item d-flex align-items-center mb-3">
-                <div>
+                <a
+                  href="https://www.google.com/maps/place/Skopje,+North+Macedonia"
+                  target="_blank"
+                >
                   <Icon icon="fa:map-marker" width="24" />
                   Skopje, Macedonia
-                </div>
+                </a>
               </div>
               <div class="list-item d-flex align-items-center mb-3">
                 <a href="mailto:dasmatej7@gmail.com" title="Send me an email">
@@ -146,7 +149,6 @@ onMounted(() => {
   const bounceThreshold = 4;
 
   const minWalkSpeed = 2.5;
-  const maxBounceDamping = 0.8;
 
   // Dragging
   let isDragging = false;
@@ -178,6 +180,10 @@ onMounted(() => {
       lastMoveTime = performance.now();
       vx = 0; // reset while dragging
       vy = 0;
+
+      // face the drag direction
+      spriteMesh.scale.x = 1;
+      spriteMesh.material.map = holdRightTex;
       // bring canvas above inputs while dragging
       canvas.value.style.zIndex = "9999";
     }
@@ -319,6 +325,10 @@ onMounted(() => {
   position: relative;
   width: 100%;
   overflow: hidden;
+  border-radius: 18px;
+  background-color: rgba(30, 34, 40, 0.96) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  transition: box-shadow 0.2s;
 }
 
 /* Canvas sits behind everything */
@@ -336,7 +346,11 @@ onMounted(() => {
 
 /* Begin Right Contact Page */
 .direct-contact-container {
-  max-width: 400px;
+  max-width: 420px;
+  margin: 0 auto;
+  background: rgba(44, 48, 56, 0.85);
+  border-radius: 14px;
+  padding: 1.5rem 1.2rem;
 }
 
 .list-item {

@@ -77,15 +77,6 @@ let projects = [
       ["Vue.js", "TypeScript", "Three.js", "GSAP"].includes(x.title)
     ),
   },
-  {
-    title: "SUS character",
-    description: `The running dummy is going to be stand alone git project soon.`,
-    image: "/sprites/amongUs.png",
-    link: "https://github.com/DasMatej/portfolio",
-    techStack: skills.filter((x) =>
-      ["JavaScript", "Three.js"].includes(x.title)
-    ),
-  },
 ];
 
 const cardRefs = ref<HTMLElement[]>([]);
