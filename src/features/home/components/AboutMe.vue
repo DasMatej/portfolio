@@ -64,7 +64,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AboutMeInfo from "./AboutMeInfo.vue";
 import KeyCards from "./KeyCards.vue";
 import KeyServices from "./KeyServices.vue";
-import KeySkills from "./KeySkills.vue";
 import SkillBubbles from "./SkillBubbles.vue";
 import { skills } from "@/data/skills";
 

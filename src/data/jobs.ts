@@ -2,11 +2,12 @@ import type { WorkingExperience } from "@/features/home/types/WorkingExperience"
 import { skills } from "./skills";
 export const jobs: WorkingExperience[] = [
   {
-    year: "2022 - Present",
-    workingTime: "3+ years",
+    startDate: new Date("2022-02-01"),
     title: "Senior Software Developer / Team Lead",
     subTitle: "Revolution Development",
+    employmentType: "Full-time",
     location: "Macedonia",
+    websiteLink: "https://dentalsymphony.com/",
     details:
       "Leading a cross-functional team of 3 developers, 1 tester, and 1 designer to deliver scalable healthcare solutions. Driving technical decisions, architecture, and development of DentalSymphony - a dental healthcare app with modules like Treatment Planning Engine, Scheduler, Dental charting and many more.",
     points: [
@@ -49,11 +50,49 @@ export const jobs: WorkingExperience[] = [
     isPresent: true,
   },
   {
-    year: "2025 - Present",
-    workingTime: "1+ year",
-    title: "Senior Frontend Engineer / Team Lead",
-    subTitle: "Digimak - Contract",
+    startDate: new Date("2026-06-01"),
+    title: "Senior Software Engineer",
+    subTitle: "LancePhase",
+    employmentType: "Contract",
     location: "Macedonia",
+    websiteLink: "https://lancephase.com/",
+    details:
+      "Working as a contract Senior Software Engineer, contributing to software development initiatives for international clients. Currently involved in the preparation and technical planning phase for upcoming projects, with implementation scheduled to begin in the coming months.",
+    points: [
+      {
+        img: "icon-park-solid:add-web",
+        details:
+          "Technical preparation and planning for an upcoming client project",
+      },
+      {
+        img: "icon-park-solid:add-web",
+        details: "Software architecture and development planning",
+      },
+      {
+        img: "icon-park-solid:add-web",
+        details:
+          "Collaborating with the team on project requirements and implementation strategy",
+      },
+    ],
+    techs: skills.filter((skill) =>
+      [
+        "React.js",
+        "TypeScript",
+        ".NET",
+        "Entity Framework",
+        "PostgreSQL",
+      ].includes(skill.title)
+    ),
+    isPresent: true,
+  },
+  {
+    startDate: new Date("2025-02-01"),
+    endDate: new Date("2026-02-01"),
+    title: "Senior Frontend Engineer / Team Lead",
+    subTitle: "Digimak",
+    employmentType: "Contract",
+    location: "Macedonia",
+    websiteLink: "https://www.digimak.com.mk/index.html",
     details:
       "Leading the development of a new Vue.js application, replacing the legacy Aztech system with a scalable, high-performance platform. Responsible for architecting the frontend from the ground up and mentoring junior developers.",
     points: [
@@ -101,11 +140,13 @@ export const jobs: WorkingExperience[] = [
     isPresent: false,
   },
   {
-    year: "2021 - 2022",
-    workingTime: "6 months",
+    startDate: new Date("2021-10-01"),
+    endDate: new Date("2022-03-01"),
     title: "Frontend Developer Intern",
     subTitle: "Emit Knowledge LLC",
-    location: "North Macedonia · Remote",
+    location: "Macedonia",
+    websiteLink: "https://emitknowledge.com/",
+    employmentType: "Internship",
     details:
       "Completed a 6-month internship focused on algorithms, frontend development, and Vue.js specialization, gaining hands-on experience with real-world projects and modern JavaScript frameworks.",
     points: [

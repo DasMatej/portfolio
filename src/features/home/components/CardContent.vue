@@ -8,9 +8,11 @@
   >
     <!-- Top row: year and working time -->
     <div class="card-header">
-      <div class="year">{{ job.year }}</div>
-      <div class="working-time" v-if="job.workingTime">
-        {{ job.workingTime }}
+      <div class="year">
+        {{ calculateYear(job.startDate as Date, job.endDate) }}
+      </div>
+      <div class="working-time">
+        {{ calculateWorkingTime(job.startDate as Date, job.endDate) }}
       </div>
     </div>
 
@@ -22,8 +24,22 @@
 
     <!-- Subtitle + location -->
     <div class="sub-info" v-if="job.subTitle || job.location">
-      <span class="subtitle">{{ job.subTitle }}</span>
-      <span v-if="job.subTitle && job.location" class="dot">•</span>
+      <Icon icon="akar-icons:link-chain" class="mt-ft-color-red" />
+      <a
+        :href="job.websiteLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        :title="`Visit website ${job.subTitle}`"
+        class="me-1"
+      >
+        <span class="subtitle">{{ job.subTitle }}</span>
+      </a>
+      <Icon
+        icon="streamline-ultimate:co-working-space-laptop-bold"
+        class="mt-ft-color-red me-1"
+      />
+      <span class="location me-2">{{ job.employmentType }}</span>
+      <Icon icon="at-icons:location" class="mt-ft-color-red" />
       <span class="location">{{ job.location }}</span>
     </div>
 
@@ -61,6 +77,8 @@ import { ref } from "vue";
 import gsap from "gsap";
 import type { WorkingExperience } from "../types/WorkingExperience";
 import SkillBubbles from "./SkillBubbles.vue";
+import { calculateYear, calculateWorkingTime } from "@/directives/jobHelper";
+
 const props = defineProps<{
   job: Partial<WorkingExperience>;
 }>();
@@ -153,8 +171,8 @@ const onLeave = () => {
 .sub-info {
   display: flex;
   align-items: center;
-  font-size: 0.95rem;
-  color: #555;
+  font-size: 1rem;
+  font-weight: 700;
   margin-bottom: 0.8rem;
 }
 

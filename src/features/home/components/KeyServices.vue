@@ -14,7 +14,7 @@
 const info = [
   {
     icon: `carbon:development`,
-    text: "Full Stack Development (ASP.NET & Vue.js / React.js / jQuery)",
+    text: "Full Stack Development (.NET & Vue.js / React.js / jQuery)",
   },
   {
     icon: `mdi:database-cog`,

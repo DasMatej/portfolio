@@ -1,5 +1,15 @@
 <template>
   <div class="contact-form">
+    <input
+      v-model="referralCode"
+      type="text"
+      name="referral_code"
+      class="form-input referral-field"
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+    />
+
     <div class="flex-fill">
       <div class="form-label">Name</div>
       <input v-model="name" class="form-control mt-input" />
@@ -43,11 +53,12 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import emailjs from "emailjs-com";
 
 const name = ref("");
 const email = ref("");
 const message = ref("");
+const referralCode = ref(false);
+const mountedAt = Date.now();
 const isSending = ref(false);
 const emailError = ref(false);
 
@@ -56,7 +67,15 @@ const isValidEmail = (email: string) => {
   return regex.test(email);
 };
 
-const sendEmail = () => {
+const sendEmail = async () => {
+  if (referralCode.value || Date.now() - mountedAt < 1500) {
+    alert("Message sent!");
+    name.value = "";
+    email.value = "";
+    message.value = "";
+    return;
+  }
+
   if (!isValidEmail(email.value)) {
     emailError.value = true;
     return;
@@ -67,35 +86,51 @@ const sendEmail = () => {
 
   isSending.value = true;
 
-  emailjs
-    .send(
-      "service_90ldjog",
-      "template_xmjniv1",
-      {
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: "e033561a-e629-4866-944c-5e55d3200909",
         name: name.value,
         email: email.value,
         message: message.value,
-        time: new Date().toLocaleString(),
-      },
-      "AI5OC-3w_8t4WpDWV"
-    )
-    .then(() => {
+      }),
+    });
+
+    const result = await response.json();
+    if (result.success) {
       alert("Message sent!");
       name.value = "";
       email.value = "";
       message.value = "";
-    })
-    .catch((err) => {
-      console.error("Failed:", err);
-      alert("Error sending message.");
-    })
-    .finally(() => {
-      isSending.value = false;
-    });
+    } else {
+      console.error("Failed:", result);
+      alert(result.message || "Error sending message.");
+    }
+  } catch (err) {
+    console.error("Failed:", err);
+    alert("Error sending message.");
+  } finally {
+    isSending.value = false;
+  }
 };
 </script>
 
 <style scoped>
+.referral-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .form-control {
   position: relative;
   z-index: 1;

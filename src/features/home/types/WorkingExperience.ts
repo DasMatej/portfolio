@@ -1,10 +1,12 @@
 import type { SkillBubble } from "./SkillBubble";
 export interface WorkingExperience {
-  year: string;
-  workingTime?: string;
+  startDate: Date;
+  endDate?: Date;
   title: string;
   subTitle?: string;
-  location?: string;
+  location: string;
+  websiteLink: string;
+  employmentType: EmploymentType;
   details: string;
   points?: Points[];
   techs?: Partial<SkillBubble>[];
@@ -14,3 +16,10 @@ export type Points = {
   img: string;
   details: string;
 };
+export type EmploymentType =
+  | "Full-time"
+  | "Part-time"
+  | "Contract"
+  | "Internship"
+  | "Freelance"
+  | "Other";

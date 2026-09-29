@@ -1,12 +1,13 @@
 import type { SkillBubble } from "@/features/home/types/SkillBubble";
 export const skills: SkillBubble[] = [
-  { title: "JavaScript", color: "247, 223, 30" }, // #f7df1e
+  { title: ".NET", color: "70, 21, 247" }, // #0638dfff
   { title: "TypeScript", color: "49, 120, 198" }, // #3178c6
-  { title: "ASP.NET", color: "70, 21, 247" }, // #4615f7
-  { title: "C#", color: "104, 33, 122" }, // #68217a
   { title: "Vue.js", color: "66, 184, 131" }, // #42b883
   { title: "SQL", color: "0, 117, 143" }, // #00758f
+  { title: "JavaScript", color: "247, 223, 30" }, // #f7df1e
+  { title: "C#", color: "104, 33, 122" }, // #68217a
   { title: "React.js", color: "97, 218, 251" }, // #61dafb
+  { title: "ASP.NET", color: "70, 21, 247" }, // #4615f7
   { title: "Microsoft SQL Server", color: "204, 41, 39" }, // #cc2927
   { title: "Python", color: "55, 118, 171" }, // #3776ab
   { title: "Entity Framework", color: "81, 43, 212" }, // #512bd4
@@ -22,7 +23,6 @@ export const skills: SkillBubble[] = [
   { title: "Firebase", color: "255, 202, 40" }, // #ffca28
   { title: "Pinia", color: "255, 216, 89" },
   { title: "Algorithms", color: "255, 65, 40" }, //#ff4128ff
-  { title: ".NET", color: "70, 21, 247" }, // #0638dfff
   { title: "Redux", color: "118, 74, 188" }, // #764abc
   { title: "Material UI", color: "0, 115, 230" }, // #hsl(210, 100%, 45%)
   { title: "Discord API", color: "114, 137, 218" }, // #7289da
@@ -31,4 +31,5 @@ export const skills: SkillBubble[] = [
   { title: "BeautifulSoup", color: "255, 122, 55" }, // #hsl(210, 100%, 45%)
   { title: "Three.js", color: "145, 151, 156" }, // #rgba(145, 151, 156, 1)
   { title: "GSAP", color: "78, 222, 59" }, // #rgba(78, 222, 59, 1)
+  { title: "PostgreSQL", color: "51, 103, 145" }, // #336791
 ];
